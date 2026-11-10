@@ -1,5 +1,5 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
-<title>نمط المذاكرة والتأجيل</title>
+<title>اختبار نمط المذاكرة</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -207,6 +207,27 @@
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation: none !important; transition: none !important; }
   }
+  /* v2 additions: context step, plan, CTA */
+  .hint { color: var(--muted); font-size: .9rem; margin: -8px 0 16px; }
+  a.btn { text-decoration: none; }
+  .btn.main { background: var(--t); color: var(--on-accent); box-shadow: 0 8px 22px -12px var(--t); }
+  .btn.wide { width: 100%; }
+  .block { margin-top: 14px; background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 16px 18px; min-width: 0; }
+  .block h3 { font-size: 1.12rem; margin-bottom: 6px; color: var(--t); }
+  .block p { margin: 0; }
+  .block p + p { margin-top: 8px; }
+  .pace { margin-top: 12px; background: var(--ts); border-radius: 12px; padding: 10px 14px; font-size: .95rem; }
+  .plan-list { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 12px; }
+  .plan-list li { display: flex; gap: 12px; align-items: flex-start; min-width: 0; }
+  .plan-list .day { flex: none; min-width: 66px; text-align: center; background: var(--ts); color: var(--t); border-radius: 10px; font-weight: 800; padding: 2px 8px; font-size: .92rem; font-family: var(--font-display); }
+  .plan-list .what { min-width: 0; }
+  .cta { margin-top: 14px; background: var(--surface); border: 2px solid var(--t); border-radius: 22px; padding: 20px; }
+  .cta h3 { font-size: 1.3rem; margin-bottom: 6px; }
+  .cta .sub { color: var(--muted); font-size: .97rem; }
+  .cta .btns { display: grid; gap: 10px; margin-top: 16px; }
+  .cta .note { color: var(--muted); font-size: .86rem; margin-top: 12px; }
+  .cta .num { direction: ltr; unicode-bidi: isolate; display: inline-block; font-variant-numeric: tabular-nums; }
+  .btn .ic { width: 1.25em; height: 1.25em; }
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
@@ -229,6 +250,8 @@
     <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2.500"/><path d="M5 15V6a2 2 0 0 1 2-2h8"/></symbol>
     <symbol id="i-redo" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.700"/><path d="M3 4v5h5"/></symbol>
     <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3l1.800 5.200L19 10l-5.200 1.800L12 17l-1.800-5.200L5 10l5.200-1.800z"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5.500h16v11H10l-5 4v-4H4z"/><path d="M8 10h8M8 13h5"/></symbol>
+    <symbol id="i-share" viewBox="0 0 24 24"><path d="M12 15V3.500M7.500 8L12 3.500 16.500 8"/><path d="M5 13v6.500h14V13"/></symbol>
     <symbol id="i-care" viewBox="0 0 24 24"><path d="M12 20c-6-4.200-8.500-7.400-8.500-10.600A4.600 4.600 0 0 1 12 7.200a4.600 4.600 0 0 1 8.500 2.200C20.500 12.600 18 15.800 12 20z"/><path d="M12 11v3M12 16.500h.01"/></symbol>
   </defs>
 </svg>
@@ -243,14 +266,14 @@
   <section id="start" class="screen">
     <div class="hero">
       <div>
-        <p class="eyebrow">٦ مواقف من أيام المذاكرة</p>
-        <h1 id="startTitle" tabindex="-1">نمط المذاكرة والتأجيل</h1>
-        <p class="lead">مش كل واحدة بتأجل لنفس السبب. جاوبي بأول رد فعل بييجي لك وقت الامتحانات، وهتعرفي نمطك ونقطة قوتك وخطوة بسيطة تبدئي بيها النهاردة.</p>
+        <p class="eyebrow">١٠ أسئلة قصيرة</p>
+        <h1 id="startTitle" tabindex="-1">ليه بتأجلي المذاكرة وإنتِ عايزة تنجحي؟</h1>
+        <p class="lead">جاوبي بأول رد فعل بييجي لك وقت الامتحانات. في الآخر هتعرفي نمطك، والفخ اللي بتقعي فيه، وخطة ٣ خطوات تبدئي بيها النهاردة.</p>
         <button class="btn primary" id="startBtn" type="button">
           <svg class="ic" aria-hidden="true"><use href="#i-spark"/></svg>
           ابدئي الاختبار
         </button>
-        <p class="fine">دقيقتين تقريبًا. مفيش إجابة غلط.</p>
+        <p class="fine">حوالي ٣ دقايق. مفيش إجابة غلط، ومش بنسجل اسمك ولا رقمك.</p>
       </div>
       <div class="hero-art">
         <svg viewBox="0 0 320 290" role="img" aria-label="مكتب مذاكرة عليه كشكول وساعة منبه وموبايل وكوباية">
@@ -298,7 +321,7 @@
       </div>
     </div>
 
-    <p class="types-title">في الآخر هتعرفي إنتي أنهي نمط من الأربعة:</p>
+    <p class="types-title">في الآخر هتعرفي إنتي أقرب لأنهي نمط من الأربعة:</p>
     <ul class="types" id="typesList"></ul>
   </section>
 
@@ -312,6 +335,7 @@
         <span class="q-icon"><svg class="ic" aria-hidden="true" id="qIcon"><use href="#i-cal"/></svg></span>
         <h2 id="qText" tabindex="-1"></h2>
       </div>
+      <p class="hint" id="qHint" hidden></p>
       <div class="options" id="options" role="radiogroup" aria-labelledby="qText"></div>
     </div>
     <div class="nav">
@@ -321,14 +345,25 @@
 
   <section id="result" class="screen" hidden></section>
 
-  <p class="foot">الاختبار ده بيوصف عادة المذاكرة عندك، وليس تقييمًا لذكائك أو لمستواك. النمط ممكن يتغير بخطوات صغيرة.</p>
+  <p class="foot">الاختبار ده بيوصف عادة المذاكرة عندك، وليس تشخيصًا ولا تقييمًا لذكائك أو لمستواك. النمط ممكن يتغير بخطوات صغيرة.</p>
 </div>
 
 <script>
 (function () {
   "use strict";
 
-  var LETTERS = { A: "أ", B: "ب", C: "ج", D: "د" };
+  /* ===== إعدادات: غيّريها هنا فقط ===== */
+  var CONFIG = {
+    coachPhone: "201014854254",                       // واتساب الكوتش بصيغة دولية بدون +
+    coachPhoneShown: "+20 10 14854254",
+    groupLink: "https://chat.whatsapp.com/Ft7JtHJtpo94I9V7rT2jZ5?s=cl&p=a&iam=2",
+    trackUrl: "",      // رابط Webhook من n8n (GET). لو فاضي، التتبع متوقف.
+    shareUrl: "",      // رابط صفحة الأداة بعد النشر. لو فاضي بيستخدم رابط الصفحة الحالي.
+    hotline: "16328",  // اتأكدي من الرقم من وزارة الصحة قبل النشر. فاضي = يتخفي.
+    toolId: "study"
+  };
+
+  var LETTERS = { 0: "أ", 1: "ب", 2: "ج", 3: "د" };
   var ORDER = ["A", "B", "C", "D"];
 
   var TYPES = {
@@ -336,54 +371,119 @@
       key: "proc", name: "المؤجّلة المبدعة", short: "المؤجّلة", icon: "i-hourglass", stepIcon: "i-timer",
       desc: "بتأجلي لحد ما الضغط يشغّلك.",
       strength: "بتشتغلي بتركيز عالي وأفكارك سريعة لما الوقت يضيق.",
-      step: "قاعدة الـ ٥ دقايق للبدء: ابدئي ٥ دقايق بس، ولو حبيتي كملي.",
+      trap: "بتستني لحظة الحماس أو الضغط عشان تبدأي. المشكلة إن الضغط بييجي متأخر، فبتذاكري كتير في وقت قليل ومن غير مراجعة.",
+      plan: [
+        "اختاري مادة واحدة وذاكري ٢٥ دقيقة بتايمر، من غير ما تستني حماس. لو حبيتي كملي.",
+        "حطي ميعاد نهاية صغير لكل جزء، زي «أخلص ده قبل ٨ بالليل»، واكتبيه قدامك.",
+        "ابدأي بأصعب جزء في أول ساعة، قبل أي حاجة تانية."
+      ],
       art: '<svg viewBox="0 0 160 130" role="img" aria-label="ساعة رملية"><circle cx="80" cy="64" r="58" fill="var(--surface)"/><path d="M48 24h64M48 104h64" stroke="var(--t)" stroke-width="7" stroke-linecap="round"/><path d="M54 28c0 22 26 28 26 36s-26 14-26 36M106 28c0 22-26 28-26 36s26 14 26 36" fill="none" stroke="var(--t)" stroke-width="5" stroke-linecap="round"/><path d="M62 34h36c-3 10-14 14-18 18-4-4-15-8-18-18z" fill="var(--t)" opacity=".5"/><path d="M80 66v26M66 100h28l-14-18z" fill="var(--t)"/><path d="M122 36l3 7 7 3-7 3-3 7-3-7-7-3 7-3z" fill="var(--t)"/></svg>'
     },
     B: {
       key: "perf", name: "المثالية المتوترة", short: "المثالية", icon: "i-target", stepIcon: "i-check",
       desc: "عايزة كل حاجة تبقى مضبوطة قبل ما تبدئي.",
       strength: "عندك التزام ودقة عالية وبتهتمي بالتفاصيل.",
-      step: "«كفاية» مقبولة، وحددي موعد انتهاء لكل جزء.",
+      trap: "بتحطي معيار عالي جدًا قبل ما تبدأي، فبتضيعي وقت في التجهيز والتدقيق، وأي غلطة بتحسسك إنك فاشلة. النتيجة إنك بتتعبي وتخلصي أقل مما تقدري.",
+      plan: [
+        "حددي ١٠ دقايق بس للترتيب والتجهيز، وبعدها ابدأي حتى لو مش مثالي.",
+        "اقبلي «كفاية»: كل جزء له وقت محدد، ولما يخلص الوقت انتقلي للي بعده.",
+        "حطي راحة ١٠ دقايق بين الأجزاء في الجدول زي أي مادة، ومتلغيهاش."
+      ],
       art: '<svg viewBox="0 0 160 130" role="img" aria-label="هدف وعلامة صح"><circle cx="80" cy="64" r="58" fill="var(--surface)"/><circle cx="80" cy="64" r="42" fill="none" stroke="var(--t)" stroke-width="5"/><circle cx="80" cy="64" r="28" fill="none" stroke="var(--t)" stroke-width="5" opacity=".6"/><circle cx="80" cy="64" r="14" fill="var(--t)"/><path d="M73 64.500l5 5 9-10" fill="none" stroke="var(--surface)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M30 34c-4 6-4 14 0 20M22 28c-7 10-7 24 0 34" fill="none" stroke="var(--t)" stroke-width="3.500" stroke-linecap="round" opacity=".5"/></svg>'
     },
     C: {
-      key: "org", name: "المنظمة الهادية", short: "المنظمة", icon: "i-calcheck", stepIcon: "i-pause",
-      desc: "بتوزعي مجهودك بشكل معقول.",
-      strength: "عندك توازن بين الجد والراحة، وبتصلحي الغلط وتكملي.",
-      step: "حافظي على الراحة.",
+      key: "org", name: "المنظمة اللي بتتهز", short: "المنظمة", icon: "i-calcheck", stepIcon: "i-pause",
+      desc: "ماشية بخطة، بس أي يوم بيبوظ بيهزّها.",
+      strength: "عندك نظام ودافع حقيقي، وبتعرفي ترجعي لخطتك.",
+      trap: "نظامك قوي طول ما كل حاجة ماشية زي المخطط. أول ما يوم يبوظ بتحسي إن الخطة كلها باظت، وده بيخليكي تقلقي أو تتأخري أكتر.",
+      plan: [
+        "اكتبي «خطة الأيام الصعبة»: ٣٠ دقيقة بس كحد أدنى، وده يحسب يوم ناجح.",
+        "سيبي ساعة فاضية كل يوم في الجدول للتعويض.",
+        "لو فاتك يوم، متعيديش الجدول كله. كملي من النقطة الجاية."
+      ],
       art: '<svg viewBox="0 0 160 130" role="img" aria-label="تقويم عليه علامة صح"><circle cx="80" cy="64" r="58" fill="var(--surface)"/><rect x="36" y="30" width="88" height="76" rx="14" fill="var(--t)"/><path d="M36 54h88" stroke="var(--surface)" stroke-width="3.500"/><path d="M58 24v14M102 24v14" stroke="var(--t)" stroke-width="7" stroke-linecap="round"/><circle cx="56" cy="68" r="4.500" fill="var(--surface)" opacity=".7"/><circle cx="80" cy="68" r="4.500" fill="var(--surface)" opacity=".7"/><circle cx="104" cy="68" r="4.500" fill="var(--surface)" opacity=".7"/><path d="M66 90l9 9 19-19" fill="none" stroke="var(--surface)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg>'
     },
     D: {
       key: "dist", name: "المشتتة", short: "المشتتة", icon: "i-phone", stepIcon: "i-door",
       desc: "بتبدئي كويس، وبعدين انتباهك بيروح لحاجة تانية.",
       strength: "فضولية وبتنتقلي بسهولة بين الأفكار.",
-      step: "ضعي الموبايل في أوضة تانية ٤٥ دقيقة.",
+      trap: "انتباهك بيتخطف بسرعة، وكل مرة بترجعي من الأول بتخسري وقت وتركيز. الموضوع مش كسل، الإلهاءات بتدخل قبل ما تاخدي بالك.",
+      plan: [
+        "حطي الموبايل في أوضة تانية ٤٥ دقيقة وذاكري.",
+        "ذاكري ٢٥ دقيقة وخدي ٥ راحة بعيد عن الشاشة، بتايمر.",
+        "قبل كل جلسة اكتبي على ورقة سطر واحد: «هخلص إيه في الجلسة دي»."
+      ],
       art: '<svg viewBox="0 0 160 130" role="img" aria-label="موبايل وإشعارات طايرة"><circle cx="80" cy="64" r="58" fill="var(--surface)"/><g transform="rotate(-10 80 66)"><rect x="56" y="26" width="48" height="82" rx="11" fill="var(--t)"/><rect x="62" y="34" width="36" height="62" rx="5" fill="var(--surface)" opacity=".9"/><circle cx="80" cy="102" r="2.500" fill="var(--surface)"/><rect x="67" y="42" width="26" height="8" rx="4" fill="var(--t)" opacity=".5"/><rect x="67" y="56" width="26" height="8" rx="4" fill="var(--t)" opacity=".35"/><rect x="67" y="70" width="18" height="8" rx="4" fill="var(--t)" opacity=".25"/></g><circle cx="124" cy="34" r="8" fill="var(--t)"/><circle cx="34" cy="48" r="6" fill="var(--t)" opacity=".7"/><circle cx="130" cy="78" r="4.500" fill="var(--t)" opacity=".5"/><path d="M118 52l6-6M28 70l-7 2" stroke="var(--t)" stroke-width="3" stroke-linecap="round"/></svg>'
     }
   };
 
-  var QUESTIONS = [
-    { icon: "i-cal", q: "قبل الامتحان بأسبوع:",
-      o: { A: "أذاكر في آخر يومين.", B: "أعمل جدول مفصل جداً.", C: "أوزع المنهج بشكل معقول.", D: "أبدأ وأتشتت." } },
-    { icon: "i-book", q: "أول ما أقعد أذاكر:",
-      o: { A: "أحتاج حاجة تلهمني.", B: "أرتب مكتبي مرتين.", C: "أبدأ بأسهل حاجة.", D: "أفتح الموبايل الأول." } },
-    { icon: "i-peak", q: "لو لقيت جزء صعب:",
-      o: { A: "أأجله.", B: "أفضل عليه لحد ما أفهمه كامل.", C: "أحاول وأطلب مساعدة.", D: "أنتقل لحاجة تانية." } },
-    { icon: "i-bolt", q: "التوتر:",
-      o: { A: "بيدفعني آخر لحظة.", B: "بيقلقني من أول يوم.", C: "بتحكم فيه بشكل معقول.", D: "بيخليني أشرد." } },
-    { icon: "i-cup", q: "الراحة:",
-      o: { A: "راحة طويلة وبعدها أندم.", B: "بتجنب الراحة.", C: "بريكات قصيرة.", D: "بتتحول لساعات سوشيال." } },
-    { icon: "i-edit", q: "لما أغلط:",
-      o: { A: "أقول هعوض بعدين.", B: "أحس إني فاشلة.", C: "أصلح وأكمل.", D: "أنسى الموضوع." } }
+  var PACE = {
+    urgent: "الوقت ضيق: ركزي على الأجزاء اللي درجتها أكتر، ومتحاوليش تخلصي كل حاجة بنفس العمق.",
+    mid: "عندك وقت يكفي لو بدأتي صح: ثبّتي الخطوات دي أسبوع كامل قبل ما تزودي ساعات المذاكرة.",
+    far: "الوقت في صفك: الهدف دلوقتي عادة صغيرة تتكرر كل يوم، مش ساعات كتير.",
+    none: "مفيش امتحان قريب، فاستغلي الهدوء ده في بناء العادة من غير ضغط."
+  };
+
+  var CTX = [
+    { ctx: "age", icon: "i-target", q: "سنك كام؟",
+      hint: "عشان نعرض لك الخطوات المناسبة لسنك. مش بنسجل اسمك ولا رقمك.",
+      o: [{ v: "minor", t: "أقل من ١٨ سنة" }, { v: "adult", t: "١٨ سنة أو أكتر" }] },
+    { ctx: "days", icon: "i-cal", q: "باقي كام يوم على أهم امتحان؟",
+      o: [{ v: "urgent", t: "أقل من أسبوع" }, { v: "mid", t: "من أسبوع لشهر" }, { v: "far", t: "أكتر من شهر" }, { v: "none", t: "مفيش امتحان قريب" }] }
   ];
+
+  var QUESTIONS = [
+    { icon: "i-cal", q: "قبل الامتحان بأسبوع وفاضل منهج كبير. أقرب حاجة ليا:",
+      o: { A: "بقول لسه فيه وقت، وهشتغل كويس لما الموضوع يضغط.", B: "برسم جدول مفصل بالساعة، وأحس إنه لازم يتظبط الأول.", C: "بقسّم المنهج على الأيام وأمشي عليه، بس لو يوم باظ بتلخبط.", D: "بقعد أبدأ فعلًا، وبعد شوية بلاقي نفسي في حاجة تانية." } },
+    { icon: "i-book", q: "أول ما أقعد أذاكر:",
+      o: { A: "بستنى مزاج أو حماس ييجي الأول.", B: "برتب المكتب والمذكرات وأجهز كل حاجة قبل ما أبدأ.", C: "بابدأ بأسهل جزء عشان أسخن وبعدين أكمل.", D: "بفتح الموبايل «دقيقة» أشوف حاجة، والدقيقة بتطول." } },
+    { icon: "i-peak", q: "لقيت جزء صعب مش فاهماه:",
+      o: { A: "بسيبه لآخر حاجة وأقول هرجعله.", B: "مبسيبهوش لحد ما أفهمه كله، حتى لو ضيعت ساعات.", C: "بحاول مرة أو اتنين وبعدين بسأل حد أو أدور على شرح.", D: "بنتقل لحاجة أسهل وبنسى أرجعله." } },
+    { icon: "i-bolt", q: "التوتر وقت الامتحانات بالنسبة لي:",
+      o: { A: "بيشغلني فجأة آخر يومين، وقبلها بكون متجاهلاه.", B: "حاساه من أول يوم، ومش بيهدى حتى لو ذاكرت.", C: "بحسه بس بقدر أمسكه، إلا لو الخطة اتلخبطت.", D: "بيخليني أشرد أو أهرب لأي حاجة تريحني." } },
+    { icon: "i-cup", q: "وقت الراحة:",
+      o: { A: "بستريح كتير وبعدها أحس بالذنب.", B: "حاسة إني مينفعش أستريح قبل ما أخلص.", C: "بآخد بريك قصير، بس لو طوّل مرة بحس إن اليوم باظ.", D: "بستريح على الموبايل وبعدها ساعة بتروح مني." } },
+    { icon: "i-edit", q: "لما أغلط في حل أو أنسى معلومة:",
+      o: { A: "أقول هعوّضها بعدين وأكمل.", B: "أحس إني فاشلة وأرجع أراجع كل حاجة من الأول.", C: "أصلحها وأكمل، بس ممكن أضايق من نفسي شوية.", D: "أنسى الموضوع وأروح لحاجة تانية." } },
+    { icon: "i-hourglass", q: "لو ضيعت يوم كامل من غير مذاكرة، اليوم اللي بعده:",
+      o: { A: "بقول بكرة يوم جديد وهعمل كل حاجة مرة واحدة.", B: "بتخنق من نفسي، ويومي اللي بعده بيتأثر.", C: "بعيد ترتيب الأيام الباقية وأكمل.", D: "بحاول أبدأ تاني، بس نفس الدوامة بترجع." } },
+    { icon: "i-spark", q: "أقرب جملة لصوتي جوايا:",
+      o: { A: "أنا بشتغل أحسن تحت الضغط.", B: "لازم أعملها كويس جدًا، وإلا مفيش فايدة.", C: "ماشية بخطة، بس بخاف أتأخر عنها.", D: "مش عارفة ليه مش قادرة أركز رغم إني عايزة." } }
+  ];
+
+  var STEPS = CTX.concat(QUESTIONS);
 
   var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var answers = [];
+  var orders = [];
   var idx = 0;
+  var lastResult = null;
 
   function $(id) { return document.getElementById(id); }
   function ar(n) { try { return n.toLocaleString("ar-EG"); } catch (e) { return String(n); } }
   function icon(id) { return '<svg class="ic" aria-hidden="true"><use href="#' + id + '"/></svg>'; }
+
+  /* ===== تتبع مجهول: بدون اسم أو رقم، يبعت أحداث بس ===== */
+  var SRC = "";
+  try {
+    var m = (location.search || "").match(/[?&]src=([A-Za-z0-9_-]{1,24})/);
+    if (m) SRC = m[1];
+  } catch (e) {}
+  function track(ev, extra) {
+    if (!CONFIG.trackUrl) return;
+    try {
+      var p = ["tool=" + CONFIG.toolId, "event=" + ev, "src=" + encodeURIComponent(SRC || "direct")];
+      if (lastResult) {
+        p.push("type=" + lastResult.win);
+        p.push("age=" + lastResult.age);
+        p.push("days=" + lastResult.days);
+      }
+      if (extra) p.push(extra);
+      p.push("t=" + Date.now());
+      var img = new Image();
+      img.src = CONFIG.trackUrl + (CONFIG.trackUrl.indexOf("?") > -1 ? "&" : "?") + p.join("&");
+    } catch (e) {}
+  }
 
   var screens = { start: $("start"), quiz: $("quiz"), result: $("result") };
 
@@ -409,10 +509,25 @@
     });
   })();
 
+  function shuffle(arr) {
+    var a = arr.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+  function resetState() {
+    answers = [];
+    orders = STEPS.map(function () { return shuffle(ORDER); });
+    idx = 0;
+    lastResult = null;
+  }
+
   function renderSegments() {
     var box = $("segments");
     box.innerHTML = "";
-    for (var i = 0; i < QUESTIONS.length; i++) {
+    for (var i = 0; i < STEPS.length; i++) {
       var s = document.createElement("span");
       if (i < idx) s.className = "done";
       else if (i === idx) s.className = "now";
@@ -421,42 +536,52 @@
   }
 
   function renderQuestion() {
-    var item = QUESTIONS[idx];
-    $("progLabel").textContent = "الموقف " + ar(idx + 1) + " من " + ar(QUESTIONS.length);
+    var item = STEPS[idx];
+    $("progLabel").textContent = "السؤال " + ar(idx + 1) + " من " + ar(STEPS.length);
     $("qText").textContent = item.q;
     $("qIcon").innerHTML = '<use href="#' + item.icon + '"/>';
     $("backLabel").textContent = idx === 0 ? "الرجوع للبداية" : "السابق";
+    var hint = $("qHint");
+    if (item.hint) { hint.textContent = item.hint; hint.hidden = false; } else { hint.hidden = true; }
     renderSegments();
 
     var box = $("options");
     box.innerHTML = "";
-    ORDER.forEach(function (L) {
+    var opts = item.ctx
+      ? item.o.map(function (o) { return { v: o.v, t: o.t }; })
+      : orders[idx].map(function (L) { return { v: L, t: item.o[L] }; });
+    opts.forEach(function (o, i) {
       var b = document.createElement("button");
       b.type = "button";
       b.className = "opt";
       b.setAttribute("role", "radio");
-      b.setAttribute("aria-checked", answers[idx] === L ? "true" : "false");
-      b.dataset.letter = L;
-      b.innerHTML = '<span class="letter">' + LETTERS[L] + '</span><span class="txt"></span>';
-      b.querySelector(".txt").textContent = item.o[L];
-      b.addEventListener("click", function () { choose(L); });
+      b.setAttribute("aria-checked", answers[idx] === o.v ? "true" : "false");
+      b.dataset.val = o.v;
+      b.innerHTML = '<span class="letter">' + LETTERS[i] + '</span><span class="txt"></span>';
+      b.querySelector(".txt").textContent = o.t;
+      b.addEventListener("click", function () { choose(o.v); });
       box.appendChild(b);
     });
   }
 
   var advanceTimer = null;
-  function choose(L) {
-    answers[idx] = L;
+  function choose(v) {
+    answers[idx] = v;
     var opts = $("options").querySelectorAll(".opt");
     for (var i = 0; i < opts.length; i++) {
-      opts[i].setAttribute("aria-checked", opts[i].dataset.letter === L ? "true" : "false");
+      opts[i].setAttribute("aria-checked", opts[i].dataset.val === v ? "true" : "false");
     }
     clearTimeout(advanceTimer);
     advanceTimer = setTimeout(next, reduceMotion ? 0 : 340);
   }
 
   function next() {
-    if (idx < QUESTIONS.length - 1) {
+    if (idx === CTX.length - 1) {
+      lastResult = { win: "-", age: answers[0], days: answers[1] };
+      track("context_done");
+      lastResult = null;
+    }
+    if (idx < STEPS.length - 1) {
       idx++;
       renderQuestion();
       show("quiz", $("qText"));
@@ -474,24 +599,24 @@
   });
 
   $("startBtn").addEventListener("click", function () {
-    answers = [];
-    idx = 0;
+    resetState();
+    track("start");
     renderQuestion();
     show("quiz", $("qText"));
   });
 
   function compute() {
     var counts = { A: 0, B: 0, C: 0, D: 0 };
-    answers.forEach(function (l) { counts[l]++; });
+    for (var i = CTX.length; i < STEPS.length; i++) counts[answers[i]]++;
     var max = Math.max(counts.A, counts.B, counts.C, counts.D);
     var tied = ORDER.filter(function (k) { return counts[k] === max; });
     var win = tied[0];
     if (tied.length > 1) {
-      for (var i = answers.length - 1; i >= 0; i--) {
-        if (tied.indexOf(answers[i]) !== -1) { win = answers[i]; break; }
+      for (var j = STEPS.length - 1; j >= CTX.length; j--) {
+        if (tied.indexOf(answers[j]) !== -1) { win = answers[j]; break; }
       }
     }
-    return { counts: counts, win: win, others: tied.filter(function (k) { return k !== win; }) };
+    return { counts: counts, win: win, others: tied.filter(function (k) { return k !== win; }), age: answers[0], days: answers[1] };
   }
 
   function selectNode(el) {
@@ -501,24 +626,74 @@
       var s = window.getSelection();
       s.removeAllRanges();
       s.addRange(r);
-    } catch (e) { /* selection unavailable */ }
+    } catch (e) {}
   }
 
-  function wireCopy(btn, text, node, idleHtml) {
+  function wireCopy(btn, getText, node, idleHtml, doneLabel, evName) {
     btn.addEventListener("click", function () {
+      var text = getText();
       var done = function (ok) {
-        btn.innerHTML = icon("i-copy") + (ok ? " اتنسخت" : " حددي النص وانسخيه");
+        btn.innerHTML = icon("i-copy") + (ok ? " " + doneLabel : " حددي النص وانسخيه");
         setTimeout(function () { btn.innerHTML = idleHtml; }, 2200);
       };
+      if (evName) track(evName);
       try {
-        navigator.clipboard.writeText(text).then(function () { done(true); }, function () { selectNode(node); done(false); });
-      } catch (e) { selectNode(node); done(false); }
+        navigator.clipboard.writeText(text).then(function () { done(true); }, function () { if (node) selectNode(node); done(false); });
+      } catch (e) { if (node) selectNode(node); done(false); }
     });
+  }
+
+  function code(L) { return "ST-" + L + (SRC ? "-" + SRC : ""); }
+  function waLink(L, name) {
+    var text = "السلام عليكم، جربت اختبار نمط المذاكرة ونتيجتي «" + name + "». كود: " + code(L);
+    return "https://wa.me/" + CONFIG.coachPhone + "?text=" + encodeURIComponent(text);
+  }
+  function planText(L) {
+    var t = TYPES[L];
+    var s = "خطتي لـ٣ أيام (" + t.name + "):\n";
+    t.plan.forEach(function (p, i) { s += "يوم " + ar(i + 1) + ": " + p + "\n"; });
+    return s.trim();
+  }
+  function pageUrl() { return CONFIG.shareUrl || location.href; }
+
+  function ctaHtml(L, t, age) {
+    if (age === "minor") {
+      return '<div class="cta">' +
+        '<h3>ابعتي الخطة لصاحبتك</h3>' +
+        '<p class="sub">المذاكرة أسهل مع حد بيجرب نفس الخطة. اطلعي الاختبار لصاحباتك وقارني النتايج.</p>' +
+        '<div class="btns">' +
+          '<button class="btn main wide" id="shareBtn" type="button">' + icon("i-share") + ' شاركي الاختبار</button>' +
+          '<button class="btn ghost wide" id="parentBtn" type="button">' + icon("i-copy") + ' انسخي رسالة لولي أمرك</button>' +
+        '</div>' +
+        '<p class="note">لو حابة تتكلمي مع مختصة، ولي أمرك يتواصل مع الكوتش د. حنان حامد. الرسالة دي بتشرح له إزاي. الجروب والمحادثة المباشرة مع الكوتش للي سنهم ١٨ سنة أو أكتر.</p>' +
+        '</div>';
+    }
+    var coachBtn = '<a class="btn %C% wide" id="coachBtn" href="' + waLink(L, t.name) + '" target="_blank" rel="noopener">' + icon("i-chat") + ' كلمي الكوتش على واتساب</a>';
+    var groupBtn = '<a class="btn %G% wide" id="groupBtn" href="' + CONFIG.groupLink + '" target="_blank" rel="noopener">' + icon("i-chat") + ' انضمي لجروب الكوتش</a>';
+    var h, sub, first;
+    if (L === "B") {
+      h = "لو الضغط ده مرهقك، اتكلمي مع الكوتش";
+      sub = "المثالية المتوترة بتتعب من التفكير في المذاكرة أكتر من المذاكرة نفسها. د. حنان حامد، لايف كوتش، تقدر تسمعك في جلسة استشارة وتساعدك تخففي الضغط ده.";
+      first = coachBtn.replace("%C%", "main") + groupBtn.replace("%G%", "ghost");
+    } else {
+      h = "كملي الخطة مع بنات زيك";
+      sub = "انضمي لجروب د. حنان حامد على واتساب، ولو حابة تسألي عن حاجة خاصة بيكي كلمي الكوتش مباشرة.";
+      first = groupBtn.replace("%G%", "main") + coachBtn.replace("%C%", "ghost");
+    }
+    return '<div class="cta">' +
+      '<h3>' + h + '</h3><p class="sub">' + sub + '</p>' +
+      '<div class="btns">' + first +
+        '<button class="btn ghost wide" id="shareBtn" type="button">' + icon("i-share") + ' ابعتي الاختبار لصاحبتك</button>' +
+      '</div>' +
+      '<p class="note">لو الزرار مفتحش، رقم واتساب الكوتش: <span class="num" id="phoneTxt">' + CONFIG.coachPhoneShown + '</span> <button class="link-btn" id="copyPhone" type="button">' + icon("i-copy") + ' نسخ</button></p>' +
+      '</div>';
   }
 
   function renderResult() {
     var res = compute();
-    var t = TYPES[res.win];
+    lastResult = res;
+    var L = res.win;
+    var t = TYPES[L];
     var box = $("result");
 
     var tie = "";
@@ -527,14 +702,21 @@
       tie = '<p class="tie">اخترتي إجابات ' + names + ' بنفس عدد المرات تقريبًا، يعني فيكي من النمطين. الأقرب ليكي في آخر المواقف هو «' + t.name + '».</p>';
     }
 
-    var bars = ORDER.map(function (L) {
-      var ty = TYPES[L];
-      var pct = Math.round(res.counts[L] / QUESTIONS.length * 100);
+    var bars = ORDER.map(function (K) {
+      var ty = TYPES[K];
+      var pct = Math.round(res.counts[K] / QUESTIONS.length * 100);
       return '<div class="bar" style="--c:var(--' + ty.key + ')">' +
         '<span>' + ty.short + '</span>' +
         '<span class="track"><span class="fill" style="width:' + pct + '%"></span></span>' +
-        '<span class="n">' + ar(res.counts[L]) + '</span></div>';
+        '<span class="n">' + ar(res.counts[K]) + '</span></div>';
     }).join("");
+
+    var planItems = t.plan.map(function (p, i) {
+      return '<li><span class="day">يوم ' + ar(i + 1) + '</span><span class="what">' + p + '</span></li>';
+    }).join("");
+
+    var hotline = CONFIG.hotline ? " وفي مصر الخط الساخن للصحة النفسية: <strong>" + ar(CONFIG.hotline) + "</strong>." : "";
+    var careExtra = (L === "B") ? " التوتر العالي من الأداء ممكن يتعب، ومش لازم تستحمليه لوحدك." : "";
 
     box.className = "screen result";
     box.style.setProperty("--t", "var(--" + t.key + ")");
@@ -546,26 +728,56 @@
         '<h2 id="resTitle" tabindex="-1">' + t.name + '</h2>' +
         '<p class="desc">' + t.desc + '</p>' + tie + '</div>' +
       '</div>' +
-      '<div class="facts">' +
-        '<div class="fact"><span class="k">نقطة قوتك</span><strong>' + t.strength + '</strong></div>' +
-        '<div class="fact step"><span class="k">خطوتك النهاردة</span>' +
-          '<div class="step-row"><span class="step-ic">' + icon(t.stepIcon) + '</span>' +
-          '<p class="step-txt" id="stepText">' + t.step + '</p></div>' +
-          '<button class="copy" id="copyStep" type="button">' + icon("i-copy") + ' انسخي الخطوة</button></div>' +
-      '</div>' +
-      '<div class="breakdown"><span class="k">إجاباتك على المواقف الستة</span><div class="bars">' + bars + '</div></div>' +
-      '<div class="care">' + icon("i-care") + '<p>لو التوتر من المذاكرة بقى كبير وبيأثر على نومك أو أكلك أو إحساسك، كلمي حد قريب منك أو مدرسة أو مرشدة تثقي فيها. طلب المساعدة بدري بيفرق.</p></div>' +
+      '<div class="block"><h3>الفخ اللي بتقعي فيه</h3><p>' + t.trap + '</p></div>' +
+      '<div class="block"><h3>نقطة قوتك</h3><p>' + t.strength + '</p></div>' +
+      '<div class="block" id="planBlock"><h3>خطتك لـ٣ أيام</h3>' +
+        '<ol class="plan-list">' + planItems + '</ol>' +
+        '<p class="pace">' + PACE[res.days] + '</p>' +
+        '<button class="copy" id="copyPlan" type="button">' + icon("i-copy") + ' انسخي الخطة</button></div>' +
+      ctaHtml(L, t, res.age) +
+      '<div class="breakdown"><span class="k">إجاباتك على المواقف الثمانية</span><div class="bars">' + bars + '</div></div>' +
+      '<div class="care">' + icon("i-care") + '<p>لو التوتر من المذاكرة بقى كبير وبيأثر على نومك أو أكلك أو إحساسك، كلمي حد قريب منك أو مدرسة أو مرشدة تثقي فيها. طلب المساعدة بدري بيفرق.' + careExtra + hotline + '</p></div>' +
       '<div class="again"><button class="btn ghost" id="againBtn" type="button">' + icon("i-redo") + ' أعيدي الاختبار</button></div>';
 
-    wireCopy($("copyStep"), t.step, $("stepText"), icon("i-copy") + " انسخي الخطوة");
+    wireCopy($("copyPlan"), function () { return planText(L); }, $("planBlock"), icon("i-copy") + " انسخي الخطة", "اتنسخت", "copy_plan");
+
+    var sb = $("shareBtn");
+    sb.addEventListener("click", function () {
+      var txt = "طلعت «" + t.name + "» في اختبار نمط المذاكرة. جربيه إنتي كمان: " + pageUrl();
+      track("share");
+      var fallback = function () {
+        try {
+          navigator.clipboard.writeText(txt).then(function () { sb.innerHTML = icon("i-copy") + " اتنسخ الرابط، ابعتيه"; }, function () { sb.innerHTML = icon("i-share") + " " + pageUrl(); });
+        } catch (e) { sb.innerHTML = icon("i-share") + " " + pageUrl(); }
+        setTimeout(function () { sb.innerHTML = icon("i-share") + (res.age === "minor" ? " شاركي الاختبار" : " ابعتي الاختبار لصاحبتك"); }, 3000);
+      };
+      if (navigator.share) {
+        navigator.share({ text: txt }).catch(fallback);
+      } else { fallback(); }
+    });
+
+    var pb = $("parentBtn");
+    if (pb) {
+      wireCopy(pb, function () {
+        return "السلام عليكم، أنا بمر بضغط في المذاكرة وحابة أتكلم مع مختصة. ممكن تتواصل مع الكوتش د. حنان حامد على واتساب " + CONFIG.coachPhoneShown + " وتسأل عن جلسة استشارة؟ كود: " + code(L);
+      }, null, icon("i-copy") + " انسخي رسالة لولي أمرك", "اتنسخت، ابعتيها لماما أو بابا", "cta_parent_copy");
+    }
+    var cb = $("coachBtn"); if (cb) cb.addEventListener("click", function () { track("cta_coach"); });
+    var gb = $("groupBtn"); if (gb) gb.addEventListener("click", function () { track("cta_group"); });
+    var cp = $("copyPhone");
+    if (cp) wireCopy(cp, function () { return CONFIG.coachPhoneShown; }, $("phoneTxt"), icon("i-copy") + " نسخ", "اتنسخ", "copy_phone");
+
     $("againBtn").addEventListener("click", function () {
-      answers = [];
-      idx = 0;
+      track("restart");
+      resetState();
       show("start", $("startTitle"));
     });
 
+    track("complete");
     show("result", $("resTitle"));
   }
+
+  resetState();
 })();
 </script>
 
