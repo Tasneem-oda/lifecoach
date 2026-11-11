@@ -1,0 +1,637 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>فحص المزاج PHQ-9</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Tajawal:wght@400;500;700&display=swap">
+<style>
+  /* Layout: single column flow (start, 6 questions, result), 720px max, on a faint graph-paper ground.
+     Hero pairs text with a study-desk illustration, stacks on phones. */
+  :root {
+    --bg: #F7F8F4;
+    --grid: #E4E8DE;
+    --surface: #FFFFFF;
+    --ink: #1D2A24;
+    --muted: #55645C;
+    --line: #D9DFD3;
+    --accent: #C2490C;
+    --accent-soft: #FDE7D6;
+    --on-accent: #FFFFFF;
+    --proc: #C2490C;
+    --proc-soft: #FDE7D6;
+    --perf: #BE123C;
+    --perf-soft: #FCE1E8;
+    --org: #15803D;
+    --org-soft: #DCF3E3;
+    --dist: #1D5FD0;
+    --dist-soft: #E0EAFC;
+    --skin: #E3AE86;
+    --hair: #2D2547;
+    --wood: #E6C9A4;
+    --wood2: #D1AB7F;
+    --feature: #2D2547;
+    --blob: #E9EEDF;
+    --font-display: "Reem Kufi", "Tajawal", Tahoma, sans-serif;
+    --font-body: "Tajawal", Tahoma, "Segoe UI", system-ui, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #121815;
+      --grid: #1C2520;
+      --surface: #1B2420;
+      --ink: #EAF3EC;
+      --muted: #A3B5A9;
+      --line: #2E3B34;
+      --accent: #FF9A5C;
+      --accent-soft: #3A2415;
+      --on-accent: #2A1205;
+      --proc: #FF9A5C;
+      --proc-soft: #3A2415;
+      --perf: #FF8DA6;
+      --perf-soft: #3C1B24;
+      --org: #5ED38A;
+      --org-soft: #153322;
+      --dist: #86A8FF;
+      --dist-soft: #1B2850;
+      --skin: #D49E78;
+      --hair: #6A5A8E;
+      --wood: #6B5436;
+      --wood2: #54412A;
+      --feature: #121815;
+      --blob: #1D2A23;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #121815;
+    --grid: #1C2520;
+    --surface: #1B2420;
+    --ink: #EAF3EC;
+    --muted: #A3B5A9;
+    --line: #2E3B34;
+    --accent: #FF9A5C;
+    --accent-soft: #3A2415;
+    --on-accent: #2A1205;
+    --proc: #FF9A5C;
+    --proc-soft: #3A2415;
+    --perf: #FF8DA6;
+    --perf-soft: #3C1B24;
+    --org: #5ED38A;
+    --org-soft: #153322;
+    --dist: #86A8FF;
+    --dist-soft: #1B2850;
+    --skin: #D49E78;
+    --hair: #6A5A8E;
+    --wood: #6B5436;
+    --wood2: #54412A;
+    --feature: #121815;
+    --blob: #1D2A23;
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    background-color: var(--bg);
+    background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 28px 28px;
+    color: var(--ink);
+    direction: rtl;
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.75;
+    padding-block: 18px 44px;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+  }
+  .app { max-width: 720px; margin-inline: auto; }
+  h1, h2, h3, p { margin: 0; }
+  h1, h2, h3 { font-family: var(--font-display); font-weight: 700; line-height: 1.4; text-wrap: balance; }
+  button { font: inherit; color: inherit; cursor: pointer; }
+  :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+  [tabindex="-1"]:focus { outline: none; }
+  .ic { width: 1.35em; height: 1.35em; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+
+  .topbar { display: flex; align-items: center; gap: 10px; padding-block: 6px 20px; color: var(--muted); font-size: .9rem; }
+  .topbar .mark { width: 34px; height: 34px; border-radius: 10px; background: var(--accent); color: var(--on-accent); display: grid; place-items: center; }
+  .topbar .mark .ic { width: 19px; height: 19px; }
+  .badge-lv { margin-inline-start: auto; font-weight: 700; font-size: .8rem; border: 1.5px solid var(--line); background: var(--surface); border-radius: 99px; padding: 1px 12px; color: var(--muted); }
+
+  .screen { animation: rise .4s ease both; }
+  @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+  .hero { display: grid; grid-template-columns: 1.1fr .9fr; gap: 26px; align-items: center; }
+  .hero > * { min-width: 0; }
+  .eyebrow { color: var(--accent); font-weight: 700; font-size: .95rem; margin-bottom: 8px; }
+  .hero h1 { font-size: clamp(2.2rem, 8.4vw, 3.4rem); margin-bottom: 14px; line-height: 1.3; }
+  .lead { color: var(--muted); font-size: 1.05rem; max-width: 34em; margin-bottom: 22px; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; border: 0; border-radius: 14px; padding: 14px 26px; font-weight: 700; font-size: 1.05rem; transition: transform .15s ease; }
+  .btn:hover { transform: translateY(-2px); }
+  .btn.primary { background: var(--accent); color: var(--on-accent); box-shadow: 0 8px 22px -10px var(--accent); }
+  .btn.ghost { background: var(--surface); border: 2px solid var(--line); color: var(--ink); padding: 11px 20px; font-weight: 700; font-size: .98rem; }
+  .fine { color: var(--muted); font-size: .88rem; margin-top: 14px; }
+  .hero-art svg { width: 100%; height: auto; display: block; max-width: 340px; margin-inline: auto; }
+
+  .types-title { margin-top: 30px; color: var(--muted); font-size: .92rem; }
+  .types { list-style: none; margin: 10px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .types li { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 14px 8px; display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; font-weight: 700; font-size: .95rem; line-height: 1.5; min-width: 0; }
+  .types .badge { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; background: var(--ts); color: var(--t); }
+  .types .badge .ic { width: 24px; height: 24px; }
+
+  .progress { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-bottom: 14px; }
+  .progress-label { color: var(--muted); font-size: .92rem; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .segments { display: flex; gap: 6px; flex: 1; }
+  .segments span { height: 7px; flex: 1; border-radius: 99px; background: var(--line); transition: background .25s ease; }
+  .segments span.done { background: var(--accent); }
+  .segments span.now { background: var(--accent); opacity: .45; }
+
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 22px; padding: 24px; }
+  .q-head { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 20px; }
+  .q-icon { width: 54px; height: 54px; border-radius: 14px; background: var(--accent-soft); color: var(--accent); display: grid; place-items: center; flex: none; }
+  .q-icon .ic { width: 28px; height: 28px; }
+  .q-head h2 { font-size: clamp(1.3rem, 4.8vw, 1.7rem); padding-top: 4px; min-width: 0; }
+  .options { display: grid; gap: 10px; }
+  .opt { display: flex; align-items: center; gap: 12px; width: 100%; text-align: right; background: var(--bg); border: 2px solid var(--line); border-radius: 14px; padding: 13px 14px; line-height: 1.6; transition: border-color .15s ease, background .15s ease, transform .15s ease; }
+  .opt:hover { border-color: var(--accent); transform: translateX(-3px); }
+  .opt .letter { width: 34px; height: 34px; border-radius: 10px; background: var(--surface); border: 2px solid var(--line); display: grid; place-items: center; font-weight: 800; flex: none; font-family: var(--font-display); }
+  .opt .txt { min-width: 0; }
+  .opt[aria-checked="true"] { border-color: var(--accent); background: var(--accent-soft); }
+  .opt[aria-checked="true"] .letter { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+  .nav { display: flex; justify-content: space-between; align-items: center; margin-top: 16px; }
+  .link-btn { background: var(--surface); border: 1px solid var(--line); border-radius: 99px; color: var(--muted); display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; font-size: .95rem; }
+  .link-btn:hover { color: var(--ink); }
+  .link-btn .ic { transform: scaleX(-1); }
+
+  .result { --t: var(--accent); --ts: var(--accent-soft); }
+  .result-head { display: grid; grid-template-columns: 170px 1fr; gap: 22px; align-items: center; background: var(--ts); border-radius: 24px; padding: 22px; }
+  .result-head > * { min-width: 0; }
+  .result-head svg { width: 100%; height: auto; display: block; }
+  .result-head .eyebrow { color: var(--t); }
+  .result-head h2 { font-size: clamp(2rem, 8vw, 2.9rem); color: var(--t); line-height: 1.3; margin-bottom: 6px; }
+  .result-head .desc { font-size: 1.1rem; font-weight: 500; }
+  .tie { margin-top: 12px; background: var(--surface); border-radius: 12px; padding: 10px 14px; font-size: .92rem; color: var(--muted); }
+
+  .facts { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 14px; }
+  .fact { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 16px 18px; min-width: 0; }
+  .fact.step { border: 2px solid var(--t); }
+  .k { display: block; color: var(--muted); font-size: .86rem; margin-bottom: 4px; }
+  .fact strong { font-size: 1.08rem; font-weight: 700; color: var(--t); }
+  .step-row { display: flex; align-items: flex-start; gap: 14px; margin-top: 6px; }
+  .step-ic { width: 46px; height: 46px; border-radius: 12px; background: var(--ts); color: var(--t); display: grid; place-items: center; flex: none; }
+  .step-ic .ic { width: 26px; height: 26px; }
+  .step-txt { font-family: var(--font-display); font-size: clamp(1.15rem, 4.6vw, 1.45rem); font-weight: 700; line-height: 1.65; min-width: 0; }
+  .copy { display: inline-flex; align-items: center; gap: 8px; background: none; border: 0; color: var(--t); font-weight: 700; padding: 8px 0 0; font-size: .95rem; }
+  .copy .ic { width: 1.1em; height: 1.1em; }
+
+  .breakdown { margin-top: 14px; background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 18px; }
+  .bars { display: grid; gap: 10px; margin-top: 10px; }
+  .bar { display: grid; grid-template-columns: 62px 1fr 34px; gap: 10px; align-items: center; font-size: .94rem; }
+  .bar .track { height: 12px; border-radius: 99px; background: var(--line); overflow: hidden; }
+  .bar .fill { display: block; height: 100%; border-radius: 99px; background: var(--c); transform-origin: right center; animation: grow .7s ease both; }
+  @keyframes grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  .bar .n { text-align: left; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+  .care { margin-top: 14px; display: flex; gap: 12px; align-items: flex-start; background: var(--accent-soft); border-radius: 16px; padding: 16px 18px; font-size: .95rem; }
+  .care .ic { color: var(--accent); margin-top: 4px; }
+  .again { display: flex; justify-content: center; margin-top: 20px; }
+  .foot { text-align: center; color: var(--muted); font-size: .84rem; margin-top: 26px; max-width: 34em; margin-inline: auto; }
+
+  @media (max-width: 640px) {
+    .hero { grid-template-columns: 1fr; gap: 16px; }
+    .types { grid-template-columns: repeat(2, 1fr); }
+    .result-head { grid-template-columns: 1fr; text-align: center; }
+    .result-head svg { max-width: 180px; margin-inline: auto; }
+    .card { padding: 18px; }
+    .btn.primary { width: 100%; }
+  }
+  @media (min-width: 641px) { .facts { grid-template-columns: 1fr 1.5fr; } }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+  /* v2 additions: context step, plan, CTA */
+  .hint { color: var(--muted); font-size: .9rem; margin: -8px 0 16px; }
+  a.btn { text-decoration: none; }
+  .btn.main { background: var(--t); color: var(--on-accent); box-shadow: 0 8px 22px -12px var(--t); }
+  .btn.wide { width: 100%; }
+  .block { margin-top: 14px; background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 16px 18px; min-width: 0; }
+  .block h3 { font-size: 1.12rem; margin-bottom: 6px; color: var(--t); }
+  .block p { margin: 0; }
+  .block p + p { margin-top: 8px; }
+  .pace { margin-top: 12px; background: var(--ts); border-radius: 12px; padding: 10px 14px; font-size: .95rem; }
+  .plan-list { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 12px; }
+  .plan-list li { display: flex; gap: 12px; align-items: flex-start; min-width: 0; }
+  .plan-list .day { flex: none; min-width: 66px; text-align: center; background: var(--ts); color: var(--t); border-radius: 10px; font-weight: 800; padding: 2px 8px; font-size: .92rem; font-family: var(--font-display); }
+  .plan-list .what { min-width: 0; }
+  .cta { margin-top: 14px; background: var(--surface); border: 2px solid var(--t); border-radius: 22px; padding: 20px; }
+  .cta h3 { font-size: 1.3rem; margin-bottom: 6px; }
+  .cta .sub { color: var(--muted); font-size: .97rem; }
+  .cta .btns { display: grid; gap: 10px; margin-top: 16px; }
+  .cta .note { color: var(--muted); font-size: .86rem; margin-top: 12px; }
+  .cta .num { direction: ltr; unicode-bidi: isolate; display: inline-block; font-variant-numeric: tabular-nums; }
+  .btn .ic { width: 1.25em; height: 1.25em; }
+  /* PHQ-9 tool: calm teal palette, IBM Plex Sans Arabic, one accent + amber/plum for higher scores */
+  :root {
+    --bg:#F2F6F7; --grid:#E1EAEC; --surface:#FFFFFF; --ink:#17262B; --muted:#50646B; --line:#D5E0E3;
+    --accent:#0F766E; --accent-soft:#D7EFEB; --on-accent:#FFFFFF;
+    --lo:#0F766E; --lo-soft:#D7EFEB; --mid:#B45309; --mid-soft:#FBE9D0; --hi:#9D1C5A; --hi-soft:#F8DDEA;
+    --font-display:"IBM Plex Sans Arabic","Tajawal",Tahoma,sans-serif;
+    --font-body:"IBM Plex Sans Arabic","Tajawal",Tahoma,"Segoe UI",system-ui,sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg:#0E1719; --grid:#152124; --surface:#172326; --ink:#E6F1F2; --muted:#9DB3B8; --line:#263538;
+      --accent:#4FD1C5; --accent-soft:#123532; --on-accent:#06211F;
+      --lo:#4FD1C5; --lo-soft:#123532; --mid:#F2A65A; --mid-soft:#3A2713; --hi:#F28AB8; --hi-soft:#3A1626;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg:#0E1719; --grid:#152124; --surface:#172326; --ink:#E6F1F2; --muted:#9DB3B8; --line:#263538;
+    --accent:#4FD1C5; --accent-soft:#123532; --on-accent:#06211F;
+    --lo:#4FD1C5; --lo-soft:#123532; --mid:#F2A65A; --mid-soft:#3A2713; --hi:#F28AB8; --hi-soft:#3A1626;
+    color-scheme: dark;
+  }
+  h1,h2,h3 { font-weight: 600; }
+  .types { grid-template-columns: repeat(3, 1fr); }
+  .meter { margin-top: 16px; }
+  .meter .track { display: flex; gap: 4px; height: 14px; position: relative; direction: rtl; }
+  .meter .seg { border-radius: 99px; background: var(--c); }
+  .meter .mark { position: absolute; top: -12px; width: 0; height: 0; border: 7px solid transparent; border-top-color: var(--ink); transform: translateX(50%); }
+  .meter .scale { display: flex; justify-content: space-between; color: var(--muted); font-size: .8rem; margin-top: 6px; font-variant-numeric: tabular-nums; }
+  .score { font-family: var(--font-display); font-size: clamp(2.6rem, 11vw, 3.6rem); font-weight: 700; color: var(--t); line-height: 1.1; }
+  .score small { font-size: 1.1rem; color: var(--muted); font-weight: 500; }
+  .alert { background: var(--hi-soft); border: 2px solid var(--hi); border-radius: 22px; padding: 20px; margin-bottom: 14px; --t: var(--hi); }
+  .alert h2 { font-size: 1.4rem; color: var(--hi); margin-bottom: 8px; }
+  .alert .btns { display: grid; gap: 10px; margin-top: 14px; }
+  .bigno { direction: ltr; unicode-bidi: isolate; font-family: var(--font-display); font-weight: 700; font-size: 1.6rem; color: var(--hi); display: inline-block; }
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 0; padding: 0; list-style: none; }
+  .tags li { background: var(--ts); color: var(--ink); border-radius: 99px; padding: 4px 12px; font-size: .92rem; }
+  .steps { margin: 10px 0 0; padding-inline-start: 1.3em; }
+  .steps li { margin-bottom: 6px; }
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3.500" y="5" width="17" height="15.500" rx="3"/><path d="M3.500 10h17M8 3v4M16 3v4"/></symbol>
+    <symbol id="i-calcheck" viewBox="0 0 24 24"><rect x="3.500" y="5" width="17" height="15.500" rx="3"/><path d="M3.500 10h17M8 3v4M16 3v4"/><path d="M9 15l2.200 2.200L15.500 13"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M12 6c-2-1.500-5-2-8-1.500v13c3-.5 6 0 8 1.500 2-1.500 5-2 8-1.500v-13C17 4 14 4.500 12 6z"/><path d="M12 6v13"/></symbol>
+    <symbol id="i-peak" viewBox="0 0 24 24"><path d="M2.500 20L9 8l4 7 2.500-4L21.500 20z"/><path d="M9 8l-1.500-2.500"/></symbol>
+    <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2.500L5 13.500h6l-1 8 8-11h-6z"/></symbol>
+    <symbol id="i-cup" viewBox="0 0 24 24"><path d="M5 9h12v5a5 5 0 0 1-5 5h-2a5 5 0 0 1-5-5z"/><path d="M17 10.500h1.500a2.500 2.500 0 0 1 0 5H17"/><path d="M9 3.500c-1 1-1 2 0 3M13 3.500c-1 1-1 2 0 3"/></symbol>
+    <symbol id="i-edit" viewBox="0 0 24 24"><path d="M4 20l1-4L16.500 4.500a2.100 2.100 0 0 1 3 3L8 19z"/><path d="M14.500 6.500l3 3"/></symbol>
+    <symbol id="i-hourglass" viewBox="0 0 24 24"><path d="M6 3h12M6 21h12"/><path d="M7 3c0 5 5 6 5 9s-5 4-5 9M17 3c0 5-5 6-5 9s5 4 5 9"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.200"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><rect x="7" y="2.500" width="10" height="19" rx="2.500"/><path d="M11 18h2"/></symbol>
+    <symbol id="i-timer" viewBox="0 0 24 24"><circle cx="12" cy="13.500" r="7.500"/><path d="M12 10v4l2.500 1.500M9.500 2.500h5"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12.200l2.800 2.800L16 9.500"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M10 9v6M14 9v6"/></symbol>
+    <symbol id="i-door" viewBox="0 0 24 24"><path d="M5 21V4h10v17"/><path d="M3 21h18"/><path d="M12 12h.01"/><path d="M15 8l5 4-5 4"/></symbol>
+    <symbol id="i-back" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2.500"/><path d="M5 15V6a2 2 0 0 1 2-2h8"/></symbol>
+    <symbol id="i-redo" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.700"/><path d="M3 4v5h5"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3l1.800 5.200L19 10l-5.200 1.800L12 17l-1.800-5.200L5 10l5.200-1.800z"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5.500h16v11H10l-5 4v-4H4z"/><path d="M8 10h8M8 13h5"/></symbol>
+    <symbol id="i-share" viewBox="0 0 24 24"><path d="M12 15V3.500M7.500 8L12 3.500 16.500 8"/><path d="M5 13v6.500h14V13"/></symbol>
+    <symbol id="i-care" viewBox="0 0 24 24"><path d="M12 20c-6-4.200-8.500-7.400-8.500-10.600A4.600 4.600 0 0 1 12 7.200a4.600 4.600 0 0 1 8.500 2.200C20.500 12.600 18 15.800 12 20z"/><path d="M12 11v3M12 16.500h.01"/></symbol>
+  </defs>
+</svg>
+
+<div class="app" id="app" dir="rtl" lang="ar">
+  <div class="topbar">
+    <span class="mark"><svg class="ic" aria-hidden="true"><use href="#i-care"/></svg></span>
+    <span>فحص مبدئي للمزاج</span>
+    <span class="badge-lv">دقيقتين</span>
+  </div>
+
+  <section id="start" class="screen">
+    <div class="hero">
+      <div>
+        <p class="eyebrow">استبيان PHQ-9 المعروف عالميًا</p>
+        <h1 id="startTitle" tabindex="-1">مزاجك بقاله فترة مش زي الأول؟</h1>
+        <p class="lead">٩ أسئلة عن آخر أسبوعين بس. هتعرفي درجتك من ٢٧، والأعراض اللي ظهرت بوضوح، والخطوة المناسبة بعدها.</p>
+        <button class="btn primary" id="startBtn" type="button">
+          <svg class="ic" aria-hidden="true"><use href="#i-spark"/></svg>
+          ابدئي الفحص
+        </button>
+        <p class="fine">إجاباتك مش بتتسجل باسمك ولا رقمك. ده فحص مبدئي، مش تشخيص.</p>
+      </div>
+      <div class="hero-art">
+        <svg viewBox="0 0 320 260" role="img" aria-label="شمس بتطلع من ورا خط الأفق وتحتها كوباية شاي">
+          <ellipse cx="160" cy="135" rx="150" ry="118" fill="var(--accent-soft)"/>
+          <circle cx="160" cy="118" r="46" fill="var(--mid)" opacity=".85"/>
+          <path d="M20 150h280" stroke="var(--ink)" stroke-width="4" stroke-linecap="round"/>
+          <path d="M60 172h200M92 194h136" stroke="var(--muted)" stroke-width="4" stroke-linecap="round" opacity=".5"/>
+          <path d="M160 52v-18M110 70l-12-12M210 70l12-12M82 108H64M256 108h-18" stroke="var(--mid)" stroke-width="5" stroke-linecap="round"/>
+          <path d="M128 214h52v22a16 16 0 0 1-16 16h-20a16 16 0 0 1-16-16z" fill="var(--accent)"/>
+          <path d="M180 220h8a8 8 0 0 1 0 16h-8" fill="none" stroke="var(--accent)" stroke-width="5"/>
+          <path d="M144 202c-4 6-4 10 0 14M160 200c-4 6-4 10 0 14" fill="none" stroke="var(--muted)" stroke-width="3.500" stroke-linecap="round" opacity=".6"/>
+        </svg>
+      </div>
+    </div>
+    <p class="types-title">هتخرجي بـ ٣ حاجات:</p>
+    <ul class="types">
+      <li style="--t:var(--lo);--ts:var(--lo-soft)"><span class="badge"><svg class="ic" aria-hidden="true"><use href="#i-target"/></svg></span><span>درجتك من ٢٧</span></li>
+      <li style="--t:var(--mid);--ts:var(--mid-soft)"><span class="badge"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg></span><span>الأعراض اللي ظهرت</span></li>
+      <li style="--t:var(--hi);--ts:var(--hi-soft)"><span class="badge"><svg class="ic" aria-hidden="true"><use href="#i-door"/></svg></span><span>خطوتك الجاية</span></li>
+    </ul>
+  </section>
+
+  <section id="quiz" class="screen" hidden>
+    <div class="progress">
+      <span class="progress-label" id="progLabel" aria-live="polite"></span>
+      <div class="segments" id="segments" aria-hidden="true"></div>
+    </div>
+    <div class="card">
+      <div class="q-head">
+        <span class="q-icon"><svg class="ic" aria-hidden="true" id="qIcon"><use href="#i-cal"/></svg></span>
+        <h2 id="qText" tabindex="-1"></h2>
+      </div>
+      <p class="hint" id="qHint" hidden></p>
+      <div class="options" id="options" role="radiogroup" aria-labelledby="qText"></div>
+    </div>
+    <div class="nav">
+      <button class="link-btn" id="backBtn" type="button"><svg class="ic" aria-hidden="true"><use href="#i-back"/></svg><span id="backLabel">السابق</span></button>
+    </div>
+  </section>
+
+  <section id="result" class="screen" hidden></section>
+
+  <p class="foot">مبني على استبيان PHQ-9 (Kroenke, Spitzer, Williams). نتيجته فحص مبدئي وليست تشخيصًا. التشخيص من طبيب أو مختص مرخّص.</p>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ===== إعدادات: غيّريها هنا فقط ===== */
+  var CONFIG = {
+    coachPhone: "201014854254",
+    coachPhoneShown: "+20 10 14854254",
+    groupLink: "https://chat.whatsapp.com/Ft7JtHJtpo94I9V7rT2jZ5?s=cl&p=a&iam=2",
+    trackUrl: "",      // رابط Webhook من n8n (GET). فاضي = التتبع متوقف.
+    shareUrl: "",      // رابط الأداة بعد النشر. فاضي = الرابط الحالي.
+    hotline: "16328",  // اتأكدي من الرقم من وزارة الصحة قبل النشر
+    emergency: "123",  // إسعاف مصر. اتأكدي منه برضه
+    minorsGroup: true, // false = إخفاء الجروب عن تحت ١٨ (سياسة الحماية). الكوتش يظهر للكل.
+    toolId: "phq9"
+  };
+
+  var LETTERS = ["أ", "ب", "ج", "د"];
+  var SCALE = ["على الإطلاق", "عدة أيام", "أكثر من نصف الأيام", "تقريبًا كل يوم"];
+  var HINT = "خلال الأسبوعين الماضيين، كم مرة أزعجتكِ هذه المشكلة؟";
+
+  /* نص أسئلة PHQ-9 (Kroenke, Spitzer, Williams) بترتيبه الأصلي. الاختصار s للعرض في النتيجة فقط. */
+  var ITEMS = [
+    { icon: "i-spark", q: "قلة الاهتمام أو الاستمتاع بعمل الأشياء", s: "قلة الاستمتاع بالأشياء" },
+    { icon: "i-care", q: "الشعور بالإحباط أو الاكتئاب أو اليأس", s: "إحباط أو يأس" },
+    { icon: "i-hourglass", q: "صعوبة في النوم أو في الاستمرار فيه، أو النوم أكثر من اللازم", s: "مشاكل في النوم" },
+    { icon: "i-bolt", q: "الشعور بالتعب أو قلة الطاقة", s: "تعب وقلة طاقة" },
+    { icon: "i-cup", q: "ضعف الشهية أو الإفراط في الأكل", s: "تغير في الشهية" },
+    { icon: "i-edit", q: "الشعور بالسوء تجاه نفسكِ، أو أنكِ فاشلة، أو أنكِ خذلتِ نفسكِ أو أسرتكِ", s: "لوم النفس والإحساس بالفشل" },
+    { icon: "i-book", q: "صعوبة في التركيز على الأشياء، مثل قراءة الصحيفة أو مشاهدة التلفاز", s: "صعوبة التركيز" },
+    { icon: "i-timer", q: "التحرك أو الكلام ببطء شديد لدرجة أن الآخرين قد يلاحظون ذلك، أو العكس: التوتر وكثرة الحركة أكثر من المعتاد", s: "بطء أو توتر ملحوظ" },
+    { icon: "i-care", q: "أفكار بأنكِ ستكونين أفضل حالًا لو كنتِ ميتة، أو بإيذاء نفسكِ بطريقة ما",
+      hint: HINT + " ده سؤال مهم، وأي إجابة صادقة هنتعامل معاها بعناية.", s: "أفكار صعبة عن النفس" }
+  ];
+
+  var AGE = { ctx: "age", icon: "i-target", q: "سنك كام؟",
+    hint: "عشان نعرض لك الخطوات المناسبة. مش بنسجل اسمك ولا رقمك.",
+    o: ["أقل من ١٨ سنة", "١٨ سنة أو أكتر"], v: ["minor", "adult"] };
+  /* السؤال العاشر في PHQ-9 (لا يدخل في الدرجة) */
+  var FUNC = { ctx: "func", icon: "i-door", q: "إذا واجهتِ أيًّا من هذه المشكلات، فإلى أي مدى جعلت من الصعب عليكِ القيام بعملكِ (أو دراستكِ) أو الاهتمام بأمور البيت أو التعامل مع الآخرين؟",
+    o: ["ليست صعبة على الإطلاق", "صعبة إلى حد ما", "صعبة جدًا", "صعبة للغاية"], v: ["0", "1", "2", "3"] };
+
+  var STEPS = [AGE].concat(ITEMS, [FUNC]);
+
+  var BANDS = [
+    { max: 4, k: "b0", c: "lo", name: "أعراض قليلة جدًا", desc: "إجاباتك بتقول إن الأعراض دي قليلة في آخر أسبوعين." },
+    { max: 9, k: "b1", c: "lo", name: "أعراض خفيفة", desc: "فيه أعراض بتظهر، لكنها في الحدود الخفيفة. مراقبتها وخطوات يومية صغيرة بتفرق." },
+    { max: 14, k: "b2", c: "mid", name: "أعراض متوسطة", desc: "الأعراض دي في المستوى اللي بيستاهل الكلام مع مختصة، مش مجرد الانتظار." },
+    { max: 19, k: "b3", c: "hi", name: "أعراض متوسطة لشديدة", desc: "الأعراض دي كتيرة ومؤثرة. الأفضل تتكلمي مع مختصة أو طبيب قريب." },
+    { max: 27, k: "b4", c: "hi", name: "أعراض شديدة", desc: "الأعراض دي شديدة. من فضلك اتكلمي مع مختصة أو طبيب نفسي في أقرب وقت." }
+  ];
+
+  var PLANS = {
+    low: ["ثبّتي ميعاد نوم وصحيان قريب من بعض كل يوم.", "اتحركي ١٠ دقايق برا البيت أو في البيت، حتى لو مش عندك مزاج.", "كلمي حد بتحبيه النهاردة ولو ١٠ دقايق."],
+    mid: ["اختاري حاجة واحدة صغيرة النهاردة (دوش، مشوار قصير، أكلة) وخلصيها من غير ما تحكمي على نفسك.", "قولي لشخص قريب منك إنك مرهقة الفترة دي، من غير ما تشرحي كل حاجة.", "حددي ميعاد تكلمي فيه مختصة، وخلي الميعاد مكتوب."],
+    high: ["النهاردة بس: كلي وانامي وخدي الدوا لو بتاخديه، من غير أي مهام زيادة.", "اتكلمي مع شخص قريب دلوقتي وقولي له إنك مش بخير.", "احجزي مع مختصة أو طبيب نفسي في أقرب وقت."]
+  };
+
+  var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var answers = [];
+  var idx = 0;
+  var lastResult = null;
+
+  function $(id) { return document.getElementById(id); }
+  function ar(n) { try { return Number(n).toLocaleString("ar-EG"); } catch (e) { return String(n); } }
+  function icon(id) { return '<svg class="ic" aria-hidden="true"><use href="#' + id + '"/></svg>'; }
+
+  var SRC = "";
+  try { var m = (location.search || "").match(/[?&]src=([A-Za-z0-9_-]{1,24})/); if (m) SRC = m[1]; } catch (e) {}
+
+  /* تتبع مجهول: أحداث وفئة سن ودرجة تصنيف، بدون اسم أو رقم أو إجابات فردية */
+  function track(ev, extra) {
+    if (!CONFIG.trackUrl) return;
+    try {
+      var p = ["tool=" + CONFIG.toolId, "event=" + ev, "src=" + encodeURIComponent(SRC || "direct")];
+      if (lastResult) { p.push("band=" + lastResult.band.k); p.push("age=" + lastResult.age); p.push("safety=" + (lastResult.safety ? 1 : 0)); }
+      if (extra) p.push(extra);
+      p.push("t=" + Date.now());
+      var img = new Image();
+      img.src = CONFIG.trackUrl + (CONFIG.trackUrl.indexOf("?") > -1 ? "&" : "?") + p.join("&");
+    } catch (e) {}
+  }
+
+  var screens = { start: $("start"), quiz: $("quiz"), result: $("result") };
+  function show(name, focusEl) {
+    Object.keys(screens).forEach(function (k) { screens[k].hidden = (k !== name); });
+    var s = screens[name];
+    s.style.animation = "none"; void s.offsetWidth; s.style.animation = "";
+    try { window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" }); } catch (e) { window.scrollTo(0, 0); }
+    if (focusEl) { try { focusEl.focus({ preventScroll: true }); } catch (e) { focusEl.focus(); } }
+  }
+
+  function renderSegments() {
+    var box = $("segments"); box.innerHTML = "";
+    for (var i = 0; i < STEPS.length; i++) {
+      var s = document.createElement("span");
+      s.className = i < idx ? "done" : (i === idx ? "now" : "");
+      box.appendChild(s);
+    }
+  }
+
+  function renderQuestion() {
+    var item = STEPS[idx];
+    $("progLabel").textContent = "السؤال " + ar(idx + 1) + " من " + ar(STEPS.length);
+    $("qText").textContent = item.q;
+    $("qIcon").innerHTML = '<use href="#' + item.icon + '"/>';
+    $("backLabel").textContent = idx === 0 ? "الرجوع للبداية" : "السابق";
+    var hint = $("qHint");
+    var h = item.hint || (item.ctx ? "" : HINT);
+    if (h) { hint.textContent = h; hint.hidden = false; } else { hint.hidden = true; }
+    renderSegments();
+    var texts = item.ctx ? item.o : SCALE;
+    var vals = item.ctx ? item.v : ["0", "1", "2", "3"];
+    var box = $("options"); box.innerHTML = "";
+    texts.forEach(function (t, i) {
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "opt";
+      b.setAttribute("role", "radio");
+      b.setAttribute("aria-checked", answers[idx] === vals[i] ? "true" : "false");
+      b.dataset.val = vals[i];
+      b.innerHTML = '<span class="letter">' + LETTERS[i] + '</span><span class="txt"></span>';
+      b.querySelector(".txt").textContent = t;
+      b.addEventListener("click", function () { choose(vals[i]); });
+      box.appendChild(b);
+    });
+  }
+
+  var advanceTimer = null;
+  function choose(v) {
+    answers[idx] = v;
+    var opts = $("options").querySelectorAll(".opt");
+    for (var i = 0; i < opts.length; i++) opts[i].setAttribute("aria-checked", opts[i].dataset.val === v ? "true" : "false");
+    clearTimeout(advanceTimer);
+    advanceTimer = setTimeout(next, reduceMotion ? 0 : 320);
+  }
+  function next() {
+    if (idx === 0) { lastResult = { band: { k: "-" }, age: answers[0], safety: false }; track("context_done"); lastResult = null; }
+    if (idx < STEPS.length - 1) { idx++; renderQuestion(); show("quiz", $("qText")); }
+    else renderResult();
+  }
+  $("backBtn").addEventListener("click", function () {
+    clearTimeout(advanceTimer);
+    if (idx === 0) { show("start", $("startTitle")); return; }
+    idx--; renderQuestion(); show("quiz", $("qText"));
+  });
+  $("startBtn").addEventListener("click", function () {
+    answers = []; idx = 0; lastResult = null; track("start"); renderQuestion(); show("quiz", $("qText"));
+  });
+
+  function wireCopy(btn, getText, idleHtml, doneLabel, ev) {
+    btn.addEventListener("click", function () {
+      var done = function (ok) {
+        btn.innerHTML = icon("i-copy") + " " + (ok ? doneLabel : "حددي النص وانسخيه");
+        setTimeout(function () { btn.innerHTML = idleHtml; }, 2600);
+      };
+      if (ev) track(ev);
+      try { navigator.clipboard.writeText(getText()).then(function () { done(true); }, function () { done(false); }); }
+      catch (e) { done(false); }
+    });
+  }
+
+  function code(b) { return "PH-" + b.k.toUpperCase() + (SRC ? "-" + SRC : ""); }
+  function waLink(b, minor) {
+    var t = "السلام عليكم، جربت فحص المزاج (PHQ-9) وحابة أتكلم مع الكوتش." + (minor ? " عمري أقل من ١٨ سنة." : "") + " كود: " + code(b);
+    return "https://wa.me/" + CONFIG.coachPhone + "?text=" + encodeURIComponent(t);
+  }
+  function pageUrl() { return CONFIG.shareUrl || location.href; }
+
+  function bandOf(score) { for (var i = 0; i < BANDS.length; i++) if (score <= BANDS[i].max) return BANDS[i]; return BANDS[4]; }
+
+  function safetyHtml(res) {
+    var age = res.age, young = age === "minor";
+    return '<div class="alert" role="alert">' +
+      '<h2>الأهم دلوقتي إنك تبقي مع حد</h2>' +
+      '<p>إجابتك على السؤال التاسع معناها إن فيه أفكار صعبة عن نفسك. أنا مش هعدّي عليها. الأفكار دي بتتقال وبيتساعد فيها، ومش لازم تستحمليها لوحدك.</p>' +
+      '<p><strong>اعملي ده النهاردة:</strong> ' + (young ? "قولي لماما أو بابا أو حد كبير تثقي فيه دلوقتي، وخليكي معاه." : "كلمي حد قريب منك دلوقتي وخليه يكون معاكي.") + '</p>' +
+      (CONFIG.hotline ? '<p>خط الصحة النفسية: <span class="bigno" id="hotNo">' + CONFIG.hotline + '</span></p>' : '') +
+      (CONFIG.emergency ? '<p>لو حاسة إنك مش آمنة على نفسك دلوقتي، اتصلي بالطوارئ: <strong class="bigno" style="font-size:1.2rem">' + CONFIG.emergency + '</strong></p>' : '') +
+      '<div class="btns"><button class="btn main wide" id="msgBtn" type="button">' + icon("i-copy") + ' انسخي رسالة تبعتيها لحد قريب</button></div>' +
+      '<p class="note" style="margin-top:14px">بعد ما تكلمي حد قريب، كمّلي مع الكوتش والجروب. هما دعم، مش خدمة طوارئ.</p>' +
+      '<div class="btns"><a class="btn ghost wide" id="coachBtn" href="' + waLink(res.band, young) + '" target="_blank" rel="noopener">' + icon("i-chat") + ' كلمي الكوتش على واتساب</a>' +
+      (young && !CONFIG.minorsGroup ? '' : '<a class="btn ghost wide" id="groupBtn" href="' + CONFIG.groupLink + '" target="_blank" rel="noopener">' + icon("i-chat") + ' انضمي لجروب الدعم النفسي</a>') + '</div>' +
+      '</div>';
+  }
+
+  function ctaHtml(res) {
+    var b = res.band, minor = res.age === "minor";
+    var low = b.k === "b0" || b.k === "b1";
+    var coach = '<a class="btn main wide" id="coachBtn" href="' + waLink(b, minor) + '" target="_blank" rel="noopener">' + icon("i-chat") + ' كلمي الكوتش على واتساب</a>';
+    var group = (minor && !CONFIG.minorsGroup) ? '' : '<a class="btn ghost wide" id="groupBtn" href="' + CONFIG.groupLink + '" target="_blank" rel="noopener">' + icon("i-chat") + ' انضمي لجروب الدعم النفسي</a>';
+    var share = '<button class="btn ghost wide" id="shareBtn" type="button">' + icon("i-share") + ' ابعتي الفحص لحد محتاجاه</button>';
+    var parent = minor ? '<button class="btn ghost wide" id="parentBtn" type="button">' + icon("i-copy") + ' انسخي رسالة لولي أمرك</button>' : '';
+    var h = low ? "خلّي معاكي دعم" : "الخطوة الأولى: اتكلمي مع الكوتش";
+    var sub = low
+      ? "حتى لو درجتك منخفضة، الكلام مع مختصة ومع بنات في نفس الفترة بيفرق. ابدئي بالكوتش أو بجروب الدعم النفسي."
+      : "د. حنان حامد، لايف كوتش متخصصة في الإرشاد النفسي، تقدر تسمعك وتساعدك تحددي الخطوة المناسبة. ولو الحالة محتاجة تقييم طبي، هتوجهك لطبيب نفسي.";
+    var note = minor ? '<p class="note">رسالة الكوتش هتوضح إن سنك أقل من ١٨. ولو تحبي، قولي لماما أو بابا كمان.</p>' : '';
+    return '<div class="cta"><h3>' + h + '</h3><p class="sub">' + sub + '</p><div class="btns">' + coach + group + parent + share + '</div>' + note +
+      '<p class="note">لو الزرار مفتحش، رقم واتساب الكوتش: <span class="num" id="phoneTxt">' + CONFIG.coachPhoneShown + '</span> <button class="link-btn" id="copyPhone" type="button">' + icon("i-copy") + ' نسخ</button></p></div>';
+  }
+
+  function renderResult() {
+    var score = 0, notable = [];
+    for (var i = 1; i <= 9; i++) {
+      var v = parseInt(answers[i], 10) || 0;
+      score += v;
+      if (v >= 2) notable.push(ITEMS[i - 1].s);
+    }
+    var item9 = parseInt(answers[9], 10) || 0;
+    var func = parseInt(answers[10], 10) || 0;
+    var band = bandOf(score);
+    var res = { score: score, band: band, age: answers[0], safety: item9 > 0 };
+    lastResult = res;
+    var group = band.max <= 9 ? "low" : (band.max <= 14 ? "mid" : "high");
+    // عنصر السؤال ٩ لا يظهر ضمن "الأعراض اللي ظهرت"، بيتعامل معاه في لوحة الأمان
+    notable = notable.filter(function (n) { return n !== ITEMS[8].s; });
+
+    var segs = [5, 5, 5, 5, 8].map(function (w, k) {
+      var c = BANDS[k].c; var op = [".55", "1", "1", ".6", "1"][k];
+      return '<span class="seg" style="flex:' + w + ';--c:var(--' + c + ');opacity:' + op + '"></span>';
+    }).join("");
+    var pct = Math.round(score / 27 * 100);
+
+    var funcLine = func > 0 ? '<p>قلتي إن الأعراض دي صعّبت عليكي حياتك اليومية. ده سبب كفاية إنك تاخدي الموضوع بجد وماتأجليهوش.</p>' : '';
+    var notableHtml = notable.length
+      ? '<ul class="tags">' + notable.map(function (n) { return '<li>' + n + '</li>'; }).join("") + '</ul>'
+      : '<p>مفيش عرض ظهر "أكتر من نص الأيام". ده شيء كويس.</p>';
+    var steps = PLANS[group].map(function (s) { return '<li>' + s + '</li>'; }).join("");
+
+    var box = $("result");
+    box.className = "screen result";
+    box.style.setProperty("--t", "var(--" + band.c + ")");
+    box.style.setProperty("--ts", "var(--" + band.c + "-soft)");
+    box.innerHTML =
+      (item9 > 0 ? safetyHtml(res) : '') +
+      '<div class="result-head" style="grid-template-columns:1fr"><div>' +
+        '<p class="eyebrow">درجتك في الفحص</p>' +
+        '<p class="score" id="resTitle" tabindex="-1">' + ar(score) + ' <small>من ٢٧</small></p>' +
+        '<h2 style="font-size:1.5rem;color:var(--t);margin:6px 0">' + band.name + '</h2>' +
+        '<p class="desc">' + band.desc + '</p>' +
+        '<div class="meter"><div class="track">' + segs + '<span class="mark" style="right:' + pct + '%"></span></div>' +
+        '<div class="scale"><span>٠</span><span>٢٧</span></div></div>' +
+      '</div></div>' +
+      '<div class="block"><h3>الأعراض اللي ظهرت أكتر</h3>' + notableHtml + funcLine + '</div>' +
+      '<div class="block"><h3>خطواتك النهاردة</h3><ol class="steps">' + steps + '</ol></div>' +
+      (item9 > 0 ? '' : ctaHtml(res)) +
+      '<div class="care">' + icon("i-care") + '<p>الفحص ده بيقيس أعراض آخر أسبوعين بس، وده مش حكم عليكي. لو التعب مستمر أو بيزيد، الكلام مع مختصة هو الخطوة الصح مهما كانت الدرجة.' + (CONFIG.hotline && item9 === 0 ? ' خط الصحة النفسية: <strong>' + ar(CONFIG.hotline) + '</strong>.' : '') + '</p></div>' +
+      '<div class="again"><button class="btn ghost" id="againBtn" type="button">' + icon("i-redo") + ' أعيدي الفحص</button></div>';
+
+    var mb = $("msgBtn");
+    if (mb) wireCopy(mb, function () { return "أنا مش بخير دلوقتي ومحتاجة حد جنبي. ممكن تيجي أو تتصل بيا حالًا؟"; }, icon("i-copy") + " انسخي رسالة تبعتيها لحد قريب", "اتنسخت، ابعتيها دلوقتي", "safety_msg_copy");
+    var pb = $("parentBtn");
+    if (pb) wireCopy(pb, function () { return "عندي فترة صعبة ومحتاجة نتكلم ونشوف مختصة تساعدني. ممكن نتواصل مع د. حنان حامد (لايف كوتش) على واتساب " + CONFIG.coachPhoneShown + "؟ كود: " + code(band); }, icon("i-copy") + " انسخي رسالة لولي أمرك", "اتنسخت، ابعتيها لماما أو بابا", "cta_parent_copy");
+    var cb = $("coachBtn"); if (cb) cb.addEventListener("click", function () { track("cta_coach"); });
+    var gb = $("groupBtn"); if (gb) gb.addEventListener("click", function () { track("cta_group"); });
+    var cp = $("copyPhone"); if (cp) wireCopy(cp, function () { return CONFIG.coachPhoneShown; }, icon("i-copy") + " نسخ", "اتنسخ", "copy_phone");
+    var sb = $("shareBtn");
+    if (sb) sb.addEventListener("click", function () {
+      var txt = "فحص مبدئي للمزاج في دقيقتين على صفحة د. حنان حامد: " + pageUrl();
+      track("share");
+      var fb = function () {
+        try { navigator.clipboard.writeText(txt).then(function () { sb.innerHTML = icon("i-copy") + " اتنسخ الرابط، ابعتيه"; }, function () { sb.textContent = pageUrl(); }); }
+        catch (e) { sb.textContent = pageUrl(); }
+      };
+      if (navigator.share) navigator.share({ text: txt }).catch(fb); else fb();
+    });
+    $("againBtn").addEventListener("click", function () { track("restart"); answers = []; idx = 0; lastResult = null; show("start", $("startTitle")); });
+
+    track("complete");
+    if (item9 > 0) track("safety_shown");
+    show("result", item9 > 0 ? box.querySelector(".alert h2") : $("resTitle"));
+    if (item9 > 0) { var h2 = box.querySelector(".alert h2"); h2.setAttribute("tabindex", "-1"); try { h2.focus({ preventScroll: true }); } catch (e) {} }
+  }
+})();
+</script>
+
+</body></html>
