@@ -1,6 +1,6 @@
 /* إعدادات الموقع كله: عدّلي هنا مرة واحدة بس */
 window.SITE = {
-  trackUrl: "",            // رابط Production Webhook من n8n (GET). فاضي = التتبع متوقف
+  trackUrl: "https://tasneemahmed-n8n.hf.space/webhook/track",            // رابط Production Webhook من n8n (GET). فاضي = التتبع متوقف
   coachPhone: "201014854254",
   coachPhoneShown: "01014854254",
   groupLink: "https://chat.whatsapp.com/Ft7JtHJtpo94I9V7rT2jZ5?s=cl&p=a&iam=2",
